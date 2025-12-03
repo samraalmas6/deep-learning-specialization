@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Science Skills & Certifications</title>
+    <title>Deep Learning Specialization - Samra Almas</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background: #f5f5f5;
             padding: 40px 20px;
         }
-        
+
         .container {
             max-width: 1000px;
             margin: 0 auto;
@@ -25,33 +25,39 @@
             box-shadow: 0 2px 20px rgba(0,0,0,0.1);
             overflow: hidden;
         }
-        
+
         .header {
             background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             color: white;
             padding: 50px 40px;
             text-align: center;
         }
-        
+
         .header h1 {
             font-size: 2.2em;
             font-weight: 600;
             margin-bottom: 10px;
         }
-        
+
         .header .subtitle {
             font-size: 1.1em;
             opacity: 0.95;
+            margin-bottom: 8px;
         }
-        
+
+        .header .instructor {
+            font-size: 0.95em;
+            opacity: 0.85;
+        }
+
         .content {
             padding: 40px;
         }
-        
+
         .section {
             margin-bottom: 40px;
         }
-        
+
         .section h2 {
             font-size: 1.5em;
             color: #1e3c72;
@@ -59,170 +65,308 @@
             padding-bottom: 10px;
             border-bottom: 2px solid #f0f0f0;
         }
-        
-        .cert-item {
-            margin-bottom: 20px;
-            padding: 25px;
-            background: #fafafa;
-            border-radius: 8px;
-            border-left: 3px solid #1e3c72;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 25px;
-        }
-        
-        .cert-item:hover {
-            background: #f5f5f5;
-            transform: translateX(5px);
+
+        /* Certificate Styles */
+        .certificate-banner {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 12px;
+            padding: 30px;
+            border: 2px solid #dee2e6;
+            position: relative;
+            overflow: hidden;
         }
 
-        .cert-content {
-            flex: 1;
+        .certificate-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -5%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(30,60,114,0.05) 0%, transparent 70%);
+            border-radius: 50%;
         }
-        
-        .cert-item h3 {
-            color: #333;
-            font-size: 1.2em;
-            margin-bottom: 8px;
-            font-weight: 600;
+
+        .cert-header {
+            text-align: center;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
         }
-        
-        .cert-org {
-            color: #2a5298;
-            font-weight: 600;
-            font-size: 0.95em;
-            display: block;
-            margin-bottom: 15px;
-        }
-        
-        .cert-btn {
-            display: inline-block;
-            padding: 10px 24px;
+
+        .cert-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
             background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             color: white;
-            text-decoration: none;
-            border-radius: 6px;
-            font-size: 0.9em;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.85em;
             font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .cert-header h3 {
+            color: #1e3c72;
+            font-size: 1.4em;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .cert-date {
+            color: #666;
+            font-size: 0.95em;
+        }
+
+        .cert-preview-container {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cert-preview-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 6px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .cert-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cert-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95em;
+            font-weight: 600;
+            cursor: pointer;
             transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
             box-shadow: 0 2px 10px rgba(30, 60, 114, 0.2);
         }
-        
-        .cert-btn:hover {
+
+        .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 15px rgba(30, 60, 114, 0.3);
         }
 
-        .cert-preview {
-            flex-shrink: 0;
-            width: 120px;
-            height: 90px;
-            border-radius: 6px;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            border: 2px solid #e0e0e0;
-            transition: all 0.3s ease;
+        .btn-secondary {
+            background: white;
+            color: #1e3c72;
+            border: 2px solid #1e3c72;
         }
 
-        .cert-preview:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 15px rgba(30, 60, 114, 0.2);
+        .btn-secondary:hover {
+            background: #1e3c72;
+            color: white;
         }
 
-        .cert-preview img {
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            display: block;
+            background: rgba(0, 0, 0, 0.95);
         }
-        
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
         }
-        
-        .skill-category {
-            background: #fafafa;
-            padding: 25px;
+
+        .modal-content {
+            width: 90%;
+            height: 90%;
+            position: relative;
+            background: white;
             border-radius: 8px;
-            border-top: 3px solid #2a5298;
+            overflow: hidden;
         }
-        
-        .skill-category h4 {
-            color: #1e3c72;
-            margin-bottom: 15px;
+
+        .modal-header {
+            background: #1e3c72;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
             font-size: 1.1em;
             font-weight: 600;
         }
-        
-        .skill-category ul {
+
+        .modal-close {
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+            width: 35px;
+            height: 35px;
+            line-height: 35px;
+            text-align: center;
+            transition: all 0.2s ease;
+            border-radius: 50%;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
+
+        .pdf-viewer {
+            width: 100%;
+            height: calc(100% - 65px);
+            border: none;
+        }
+
+        /* Course Section */
+        .courses-grid {
+            display: grid;
+            gap: 15px;
+        }
+
+        .course-item {
+            background: #fafafa;
+            border-radius: 8px;
+            padding: 20px;
+            border-left: 3px solid #1e3c72;
+            transition: all 0.3s ease;
+        }
+
+        .course-item:hover {
+            background: #f5f5f5;
+            transform: translateX(5px);
+        }
+
+        .course-item h3 {
+            color: #333;
+            font-size: 1.05em;
+            font-weight: 600;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-card {
+            background: #fafafa;
+            border-radius: 8px;
+            padding: 25px;
+            border-top: 3px solid #2a5298;
+        }
+
+        .skill-card h3 {
+            color: #1e3c72;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .skill-card ul {
             list-style: none;
         }
-        
-        .skill-category li {
+
+        .skill-card li {
             padding: 5px 0;
             padding-left: 18px;
             position: relative;
             font-size: 0.95em;
             color: #555;
         }
-        
-        .skill-category li:before {
+
+        .skill-card li:before {
             content: "•";
             position: absolute;
             left: 0;
             color: #2a5298;
             font-weight: bold;
         }
-        
-        .project-box {
+
+        /* Frameworks Section */
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .tech-tag {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 0.95em;
+            font-weight: 500;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 15px;
+        }
+
+        .project-card {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 30px;
+            padding: 20px;
             border-radius: 8px;
             transition: transform 0.3s ease;
         }
 
-        .project-box:hover {
-            transform: translateY(-3px);
+        .project-card:hover {
+            transform: translateY(-5px);
         }
-        
-        .project-box h4 {
-            margin-bottom: 15px;
-            font-size: 1.2em;
+
+        .project-card h4 {
+            font-size: 1.05em;
+            margin-bottom: 8px;
             font-weight: 600;
         }
-        
-        .project-box ul {
-            list-style: none;
+
+        .project-card p {
+            font-size: 0.9em;
+            opacity: 0.9;
+            line-height: 1.5;
         }
-        
-        .project-box li {
-            padding: 6px 0;
-            padding-left: 20px;
-            position: relative;
-            font-size: 0.95em;
-            line-height: 1.6;
-        }
-        
-        .project-box li:before {
-            content: "→";
-            position: absolute;
-            left: 0;
-            font-weight: bold;
-        }
-        
-        .footer {
-            text-align: center;
-            margin-top: 40px;
-            padding-top: 25px;
-            border-top: 2px solid #f0f0f0;
-            color: #666;
-            font-size: 0.95em;
-        }
-        
+
+        /* Responsive Design */
         @media (max-width: 768px) {
             .header {
                 padding: 40px 30px;
@@ -231,25 +375,32 @@
             .content {
                 padding: 30px 25px;
             }
-            
+
             .header h1 {
                 font-size: 1.8em;
             }
-            
-            .skills-grid {
+
+            .certificate-banner {
+                padding: 25px 20px;
+            }
+
+            .cert-actions {
+                flex-direction: column;
+            }
+
+            .cert-btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .skills-grid,
+            .projects-grid {
                 grid-template-columns: 1fr;
             }
 
-            .cert-item {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .cert-preview {
-                width: 100%;
-                height: 150px;
-                order: -1;
-                margin-bottom: 15px;
+            .modal-content {
+                width: 95%;
+                height: 85%;
             }
         }
     </style>
@@ -257,96 +408,247 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>Data Science Skills & Certifications</h1>
-            <p class="subtitle">Python | Data Analysis | Machine Learning</p>
+            <h1>Deep Learning Specialization</h1>
+            <p class="subtitle">Neural Networks | Computer Vision | NLP</p>
+            <p class="instructor">Coursera | Instructor: Andrew Ng</p>
         </div>
 
         <div class="content">
+            <!-- Certificate Section -->
             <div class="section">
-                <h2>Certifications</h2>
-                
-                <div class="cert-item">
-                    <div class="cert-content">
-                        <h3>Python for Data Science, AI & Development</h3>
-                        <span class="cert-org">IBM | Coursera</span>
-                        <a href="certifications/python-for-data-science-ai-and-development.pdf" target="_blank" class="cert-btn">View Certificate →</a>
+                <h2>Certificate of Completion</h2>
+                <div class="certificate-banner">
+                    <div class="cert-header">
+                        <div class="cert-badge">
+                            <span>✓</span>
+                            <span>VERIFIED CERTIFICATE</span>
+                        </div>
+                        <h3>Successfully Completed All 5 Courses</h3>
+                        <p class="cert-date">Issued: December 3, 2025</p>
                     </div>
-                    <div class="cert-preview">
-                        <img src="certifications/certificate-preview1.png" alt="Certificate Preview">
+                    
+                    <div class="cert-preview-container">
+                        <img id="certPreview" src="" alt="Deep Learning Specialization Certificate">
                     </div>
-                </div>
-                
-                <div class="cert-item">
-                    <div class="cert-content">
-                        <h3>Python Project for Data Science</h3>
-                        <span class="cert-org">IBM | Coursera</span>
-                        <a href="certifications/python-project-for-data-science.pdf" target="_blank" class="cert-btn">View Certificate →</a>
-                    </div>
-                    <div class="cert-preview">
-                        <img src="certifications/certificate-preview1.png" alt="Certificate Preview">
+
+                    <div class="cert-actions">
+                        <button class="cert-btn btn-primary" onclick="openPDFModal()">
+                            <span>📄</span>
+                            <span>View Full PDF</span>
+                        </button>
+                        <a href="https://coursera.org/verify/specialization/CGSZ3YXU4S6E" target="_blank" class="cert-btn btn-secondary">
+                            <span>🔗</span>
+                            <span>Verify on Coursera</span>
+                        </a>
                     </div>
                 </div>
             </div>
 
+            <!-- Courses Completed Section -->
+            <div class="section">
+                <h2>Courses Completed</h2>
+                <div class="courses-grid">
+                    <div class="course-item">
+                        <h3>1. Neural Networks and Deep Learning</h3>
+                    </div>
+                    <div class="course-item">
+                        <h3>2. Improving Deep Neural Networks</h3>
+                    </div>
+                    <div class="course-item">
+                        <h3>3. Structuring Machine Learning Projects</h3>
+                    </div>
+                    <div class="course-item">
+                        <h3>4. Convolutional Neural Networks</h3>
+                    </div>
+                    <div class="course-item">
+                        <h3>5. Sequence Models</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technical Skills Section -->
             <div class="section">
                 <h2>Technical Skills</h2>
-                
                 <div class="skills-grid">
-                    <div class="skill-category">
-                        <h4>Programming</h4>
+                    <div class="skill-card">
+                        <h3>Neural Networks</h3>
                         <ul>
-                            <li>Python</li>
-                            <li>OOP</li>
-                            <li>Data Structures</li>
+                            <li>Deep Neural Networks</li>
+                            <li>Backpropagation</li>
+                            <li>Vectorization</li>
                         </ul>
                     </div>
-                    
-                    <div class="skill-category">
-                        <h4>Data Analysis</h4>
+
+                    <div class="skill-card">
+                        <h3>Optimization</h3>
                         <ul>
-                            <li>Pandas</li>
-                            <li>NumPy</li>
-                            <li>Data Manipulation</li>
+                            <li>Gradient Descent</li>
+                            <li>Adam & Momentum</li>
+                            <li>Hyperparameter Tuning</li>
                         </ul>
                     </div>
-                    
-                    <div class="skill-category">
-                        <h4>Web Data</h4>
+
+                    <div class="skill-card">
+                        <h3>Regularization</h3>
                         <ul>
-                            <li>Web Scraping</li>
-                            <li>REST APIs</li>
-                            <li>BeautifulSoup</li>
+                            <li>L2 Regularization</li>
+                            <li>Dropout</li>
+                            <li>Batch Normalization</li>
                         </ul>
                     </div>
-                    
-                    <div class="skill-category">
-                        <h4>Visualization</h4>
+
+                    <div class="skill-card">
+                        <h3>Computer Vision</h3>
                         <ul>
-                            <li>Plotly</li>
-                            <li>Dashboards</li>
-                            <li>Jupyter</li>
+                            <li>CNN & ResNet</li>
+                            <li>YOLO Object Detection</li>
+                            <li>Face Recognition</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-card">
+                        <h3>NLP & Sequences</h3>
+                        <ul>
+                            <li>RNN, LSTM, GRU</li>
+                            <li>Word Embeddings</li>
+                            <li>Attention Mechanisms</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-card">
+                        <h3>ML Strategy</h3>
+                        <ul>
+                            <li>Bias-Variance Analysis</li>
+                            <li>Transfer Learning</li>
+                            <li>Error Analysis</li>
                         </ul>
                     </div>
                 </div>
             </div>
 
+            <!-- Projects Section -->
             <div class="section">
-                <h2>Project</h2>
-                <div class="project-box">
-                    <h4>Data Science Project</h4>
-                    <ul>
-                        <li>End-to-end data analysis</li>
-                        <li>Web scraping & data extraction</li>
-                        <li>Interactive dashboards</li>
-                        <li>Python libraries integration</li>
-                    </ul>
+                <h2>Projects</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <h4>Neural Style Transfer</h4>
+                        <p>Artistic style transfer using CNNs</p>
+                    </div>
+                    <div class="project-card">
+                        <h4>Car Detection (YOLO)</h4>
+                        <p>Real-time object detection</p>
+                    </div>
+                    <div class="project-card">
+                        <h4>Face Recognition</h4>
+                        <p>Siamese networks with triplet loss</p>
+                    </div>
+                    <div class="project-card">
+                        <h4>Music Generation</h4>
+                        <p>LSTM for jazz synthesis</p>
+                    </div>
+                    <div class="project-card">
+                        <h4>Machine Translation</h4>
+                        <p>Seq2seq with attention</p>
+                    </div>
+                    <div class="project-card">
+                        <h4>Trigger Word Detection</h4>
+                        <p>Speech recognition with RNN</p>
+                    </div>
                 </div>
-            </div>
-
-            <div class="footer">
-                <p>Verified certifications available on LinkedIn</p>
             </div>
         </div>
     </div>
+
+    <!-- PDF Modal -->
+    <div id="pdfModal" class="modal" onclick="closePDFModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h3>Certificate - Deep Learning Specialization</h3>
+                <button class="modal-close" onclick="closePDFModal()">&times;</button>
+            </div>
+            <iframe id="pdfViewer" class="pdf-viewer"></iframe>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // CONFIGURATION - UPDATE THESE PATHS
+        // ============================================
+        const certificateImage = 'certifications/Deep-Learning-Specialization.png';
+        const certificatePDF = 'certifications/Deep-Learning-Specialization.pdf';
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set certificate preview image
+            const certPreview = document.getElementById('certPreview');
+            certPreview.src = certificateImage;
+            
+            // Add loading animation
+            certPreview.style.opacity = '0';
+            certPreview.style.transition = 'opacity 0.5s ease';
+            
+            certPreview.onload = function() {
+                setTimeout(() => {
+                    certPreview.style.opacity = '1';
+                }, 100);
+            };
+
+            certPreview.onerror = function() {
+                console.error('Failed to load certificate image. Please check the path:', certificateImage);
+                certPreview.alt = 'Certificate image not found. Please check the file path.';
+            };
+
+            console.log('Deep Learning Specialization page loaded successfully!');
+        });
+
+        // PDF Modal functions
+        function openPDFModal() {
+            const modal = document.getElementById('pdfModal');
+            const pdfViewer = document.getElementById('pdfViewer');
+            
+            // Set PDF source
+            pdfViewer.src = certificatePDF;
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            console.log('PDF modal opened');
+        }
+
+        function closePDFModal() {
+            const modal = document.getElementById('pdfModal');
+            const pdfViewer = document.getElementById('pdfViewer');
+            
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            
+            // Clear PDF to stop loading
+            pdfViewer.src = '';
+            
+            console.log('PDF modal closed');
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closePDFModal();
+            }
+        });
+
+        // Add animation on page load
+        window.addEventListener('load', function() {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach((section, index) => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                
+                setTimeout(() => {
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
 </body>
 </html>
